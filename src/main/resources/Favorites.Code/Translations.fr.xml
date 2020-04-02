@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xwikidoc version="1.4" reference="Favorites.Code.Translations" locale="fr">
+  <web>Favorites.Code</web>
+  <name>Translations</name>
+  <language>fr</language>
+  <defaultLanguage/>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1577833200000</creationDate>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1577833200000</date>
+  <contentUpdateDate>1577833200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content># Other keys
+favorites.entry.name=Favoris
+
+# Deprecated keys
+favorites.dataSpace.title=Data
+
+ # Other keys
+favorites.entry.name=Favoris
+favorites.page.title=Favoris
+favorites.entry.name=Favoris
+
+# Deprecated keys
+favorites.dataSpace.title=Data
+# Live table additional keys
+favorites.default.actions_edit=Modifier les Favoris par défaut
+favorites.user.actions_edit=Gérer les Favoris
+favorites.user.tools_access=Accéder aux Favoris
+favorites.form.save_button_text=Sauvegarder
+
+# Panel keys
+favorites.panel.title=Mes Favoris
+
+# Modal popup keys
+favorites.modal.title=Gérer les Favoris par défaut
+favorites.modal.user.title=Gérer mes Favoris
+favorites.pinned.modal.user.title=Gérer mes Favoris mis en avant
+
+# Help
+favorites.help.description=Bienvenue sur l'administration des Favoris. Pour activer les Favoris vous devez ajouter le panneau Favorites.Code.FavoritesPanel dans les panneaux lateraux dans l'administration, ou ajouter la page Favorites.Code.FavoritesMenu par inclusion dans un Menu. Ci-dessous vous pouvez modifier les Favoris par défaut.
+</content>
+</xwikidoc>
