@@ -42,6 +42,10 @@
       <id>ldubost</id>
       <name>Ludovic Dubost, XWiki SAS</name>
     </developer>
+    <developer>
+      <id>acotiuga</id>
+      <name>Alex Cotiugă</name>
+    </developer>
   </developers>
   <properties>   
     <xwiki.extension.category>application</xwiki.extension.category>
