@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Favorites.Code.FavoritesPanel" locale="">
+  <web>Favorites.Code</web>
+  <name>FavoritesPanel</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1577833200000</creationDate>
+  <parent>Favorites.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1591716634000</date>
+  <contentUpdateDate>1591716634000</contentUpdateDate>
+  <version>1.1</version>
+  <title>FavoritesPanel</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content/>
+  <object>
+    <name>Favorites.Code.FavoritesPanel</name>
+    <number>0</number>
+    <className>Panels.PanelClass</className>
+    <guid>06888c12-7985-4c1f-8f8e-6e407cabbcce</guid>
+    <class>
+      <name>Panels.PanelClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <category>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>category</name>
+        <number>5</number>
+        <prettyName>Category</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Information|Navigation|Tools|Administration|Other</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </category>
+      <content>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>content</name>
+        <number>4</number>
+        <prettyName>Content</prettyName>
+        <rows>25</rows>
+        <size>120</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <description>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>3</number>
+        <prettyName>Description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>type</name>
+        <number>2</number>
+        <prettyName>Panel type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>view|edit</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </type>
+    </class>
+    <property>
+      <category>Information</category>
+    </property>
+    <property>
+      <content>{{velocity}}
+#macro(displayFavoritesList $favoritesList)
+&lt;ul&gt;
+#foreach ($FavoritesDocFullName in $favoritesList)
+  #if ($xwiki.exists($FavoritesDocFullName))
+    #set ($FavoritesDoc = $xwiki.getDocument($FavoritesDocFullName))
+    #set ($FavoritesUrl = $FavoritesDoc.getURL("view"))
+    &lt;li&gt;&lt;span class="wikiexternallink"&gt;&lt;a href="$!escapetool.xml($FavoritesUrl)" target="_blank"&gt;$FavoritesDoc.displayTitle&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  #end
+#end
+&lt;/ul&gt;
+#end
+#panelheader($services.localization.render('favorites.panel.title'))
+##
+#set ($discard = $xwiki.jsfx.use('uicomponents/suggest/suggestPropertyValues.js', {'forceSkinAction': true, 'language': $xcontext.locale}))
+#set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.bootstrap3.css'),
+    {'type': 'text/css', 'rel': 'stylesheet'}))
+#set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
+#set ($discard = $xwiki.ssx.use("Favorites.Code.FavoritesSheet"))
+#set ($discard = $xwiki.jsx.use("Favorites.Code.FavoritesSheet"))
+#set ($userDoc = $xwiki.getDocument($xcontext.user))
+#set ($FavoritesObj = $userDoc.getObject("Favorites.Code.FavoritesClass"))
+#set ($FavoritesSourceDoc = $userDoc)
+#if ("$!FavoritesObj" == '')
+  #set ($FavoritesSourceDoc = $xwiki.getDocument("Favorites.Code.FavoritesTemplate"))
+#end
+#set ($FavoritesObj = $FavoritesSourceDoc.getObject("Favorites.Code.FavoritesClass"))
+{{html}}
+#if ("$!FavoritesObj" != '')
+  #if ($FavoritesObj.getProperty("pinnedPages").value.size() &gt; 0)
+    #displayFavoritesList($FavoritesObj.getProperty("pinnedPages").value)
+    #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
+      &lt;hr/&gt;
+    #else
+      &lt;div class="wikimodel-emptyline"&gt;&lt;/div&gt;
+    #end
+  #end
+  #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
+  #displayFavoritesList($FavoritesObj.getProperty("pages").value)
+  &lt;div class="wikimodel-emptyline"&gt;&lt;/div&gt;
+  #end
+#end
+&lt;a href="javascript:;" class="btn btn-default editFavorites isUser"&gt;
+  &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
+  $!services.localization.render('favorites.user.actions_edit')
+&lt;/a&gt;
+&lt;div&gt;
+#*
+&lt;a href="$xwiki.getURL('Favorites.WebHome')" class="btn btn-primary"&gt;
+  &lt;span class="glyphicon glyphicon-th-list" aria-hidden="true"&gt;&lt;/span&gt;
+  $!services.localization.render('favorites.user.tools_access')
+&lt;/a&gt;
+*#
+&lt;/div&gt;
+## Save the URLs that are used to add/edit FavoritesClass object of the current user in the DOM instead of genrating them on the js extension to avoid cache issues.
+#set ($editUserFavoritesURL = $xwiki.getURL($xcontext.user, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
+#set ($newUserFavoritesObjectURL = $xwiki.getURL($xcontext.user, 'edit', 'xpage=editobject&amp;xaction=addObject&amp;className=Favorites.Code.FavoritesClass'))
+&lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
+&lt;input type="hidden" id="newUserFavoritesObjectURL" value="$escapetool.xml($newUserFavoritesObjectURL)"/&gt;
+##
+{{/html}}
+##
+#panelfooter()
+{{/velocity}}</content>
+    </property>
+    <property>
+      <description>This panel will display an alphabetical list of favorites for the current user.</description>
+    </property>
+    <property>
+      <name>FavoritesPanel</name>
+    </property>
+    <property>
+      <type>view</type>
+    </property>
+  </object>
+  <object>
+    <name>Favorites.Code.FavoritesPanel</name>
+    <number>0</number>
+    <className>XWiki.XWikiRights</className>
+    <guid>95d55f00-c256-46a9-ad41-69a3de4ec4f2</guid>
+    <class>
+      <name>XWiki.XWikiRights</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <allow>
+        <defaultValue>1</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>allow</displayType>
+        <name>allow</name>
+        <number>4</number>
+        <prettyName>Allow/Deny</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </allow>
+      <groups>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <multiSelect>1</multiSelect>
+        <name>groups</name>
+        <number>1</number>
+        <picker>1</picker>
+        <prettyName>Groups</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.GroupsClass</classType>
+      </groups>
+      <levels>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>1</multiSelect>
+        <name>levels</name>
+        <number>2</number>
+        <prettyName>Levels</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>3</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.LevelsClass</classType>
+      </levels>
+      <users>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <multiSelect>1</multiSelect>
+        <name>users</name>
+        <number>3</number>
+        <picker>1</picker>
+        <prettyName>Users</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </users>
+    </class>
+    <property>
+      <allow>1</allow>
+    </property>
+    <property>
+      <groups>XWiki.XWikiAllGroup,</groups>
+    </property>
+    <property>
+      <levels>view</levels>
+    </property>
+    <property>
+      <users/>
+    </property>
+  </object>
+</xwikidoc>
