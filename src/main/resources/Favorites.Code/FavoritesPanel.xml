@@ -217,7 +217,7 @@
   &lt;div class="wikimodel-emptyline"&gt;&lt;/div&gt;
   #end
 #end
-&lt;a href="javascript:;" class="btn btn-success editFavorites isUser"&gt;
+&lt;a href="javascript:;" class="btn btn-default editFavorites isUser"&gt;
   &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
   $!services.localization.render('favorites.user.actions_edit')
 &lt;/a&gt;
