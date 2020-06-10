@@ -244,6 +244,12 @@ require(['jquery', 'xwiki-suggestPropertyValues'], function($){
       $('#errors-container').html('').append($('&lt;div /&gt;', {'class': 'box errormessage', 'text': jqXHR.responseText}));
     });
   });
+
+  // Button to expand all the Favorites in the panl.
+  $('.FavoritesPanel li.more').click(function() {
+    $(this).siblings('.hidden').removeClass('hidden');
+    $(this).addClass('hidden');
+  });
 });</code>
     </property>
     <property>

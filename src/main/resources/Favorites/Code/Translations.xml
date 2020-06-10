@@ -65,6 +65,7 @@ favorites.form.save_button_text=Save
 
 
 # Panel keys
+favorites.panel.more={0} more ...
 favorites.panel.title=My Favorites
 
 # Modal popup keys

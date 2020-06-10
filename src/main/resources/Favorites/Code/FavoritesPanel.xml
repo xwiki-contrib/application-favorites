@@ -125,12 +125,22 @@
       <content>{{velocity}}
 #macro(displayFavoritesList $favoritesList)
 &lt;ul&gt;
-#foreach ($FavoritesDocFullName in $favoritesList)
-  #if ($xwiki.exists($FavoritesDocFullName))
-    #set ($FavoritesDoc = $xwiki.getDocument($FavoritesDocFullName))
-    #set ($FavoritesUrl = $FavoritesDoc.getURL("view"))
-    &lt;li&gt;&lt;span class="wikiexternallink"&gt;&lt;a href="$!escapetool.xml($FavoritesUrl)" target="_blank"&gt;$FavoritesDoc.displayTitle&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+#set ($itemsNumberToDisplay = 5)
+#foreach ($favoritesDocFullName in $favoritesList)
+  #if ($xwiki.exists($favoritesDocFullName))
+    #set ($favoritesDoc = $xwiki.getDocument($favoritesDocFullName))
+    &lt;li #if($foreach.index &gt;= $itemsNumberToDisplay)class="hidden" #end&gt;
+      &lt;span class="wikiexternallink"&gt;
+        &lt;a href="$!escapetool.xml($favoritesDoc.URL)" target="_blank"&gt;$favoritesDoc.displayTitle&lt;/a&gt;
+      &lt;/span&gt;
+    &lt;/li&gt;
   #end
+#end
+#if ($favoritesList.size() &gt; $itemsNumberToDisplay)
+  #set ($moreNumber = $mathtool.sub($favoritesList.size(),$itemsNumberToDisplay))
+  &lt;li class="more"&gt;
+    &lt;a href="#"&gt;$services.localization.render('favorites.panel.more', [$moreNumber])&lt;/a&gt;
+  &lt;/li&gt;
 #end
 &lt;/ul&gt;
 #end

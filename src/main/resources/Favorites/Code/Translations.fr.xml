@@ -64,6 +64,7 @@ favorites.user.updateProfile=Pages favorites mises à jour.
 favorites.form.save_button_text=Sauvegarder
 
 # Panel keys
+favorites.panel.more={0} autres...
 favorites.panel.title=Mes Favoris
 
 # Modal popup keys
