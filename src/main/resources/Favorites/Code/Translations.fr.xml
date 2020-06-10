@@ -55,7 +55,12 @@ favorites.dataSpace.title=Data
 # Live table additional keys
 favorites.default.actions_edit=Modifier les Favoris par défaut
 favorites.user.actions_edit=Gérer les Favoris
+favorites.user.addCurrentPage=Ajouter cette page
+favorites.user.addCurrentPage.alreadyExists=La page existe déjà dans les favoris.
+favorites.user.addCurrentPage.fail=Échec de l'ajout de la page actuelle aux favoris.
+favorites.user.addCurrentPage.success=Page ajoutée aux favoris.
 favorites.user.tools_access=Accéder aux Favoris
+favorites.user.updateProfile=Pages favorites mises à jour.
 favorites.form.save_button_text=Sauvegarder
 
 # Panel keys

@@ -54,9 +54,15 @@ favorites.entry.name=Favorites
 favorites.dataSpace.title=Data
 # Live table additional keys
 favorites.default.actions_edit=Edit Default Favorites
+favorites.user.addCurrentPage=Add this page
+favorites.user.addCurrentPage.alreadyExists=Page already exists in favorites.
+favorites.user.addCurrentPage.fail=Failed to add the current page to favorites.
+favorites.user.addCurrentPage.success=Page added to favorites.
 favorites.user.actions_edit=Manage Favorites
 favorites.user.tools_access=Access Favorites
+favorites.user.updateProfile=Favorite pages updated.
 favorites.form.save_button_text=Save
+
 
 # Panel keys
 favorites.panel.title=My Favorites
