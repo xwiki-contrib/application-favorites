@@ -64,6 +64,9 @@
  favorites.modal.user.title=Управление избранным
  favorites.pinned.modal.user.title=Manager my pinned Favorites
 
+# User profile
+favorites.userprofile.menu=Избранные
+
 # Help
  favorites.help.description= Добро пожаловать в Управление избранным. Для того что бы активировать Избранное вам нужно добавить Favorites.Code.FavoritesPanel в список ваших панелей или добавить Favorites.Code.FavoritesMenu в ваше меню. Ниже вы можете редактирвоать список Избранного по умолчанию.</content>
 </xwikidoc>

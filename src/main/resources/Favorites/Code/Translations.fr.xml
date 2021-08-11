@@ -72,6 +72,9 @@ favorites.modal.title=Gérer les Favoris par défaut
 favorites.modal.user.title=Gérer mes Favoris
 favorites.pinned.modal.user.title=Gérer mes Favoris mis en avant
 
+# User profile
+favorites.userprofile.menu=Mes Favoris
+
 # Help
 favorites.help.description=Bienvenue sur l'administration des Favoris. Pour activer les Favoris vous devez ajouter le panneau Favorites.Code.FavoritesPanel dans les panneaux lateraux dans l'administration, ou ajouter la page Favorites.Code.FavoritesMenu par inclusion dans un Menu. Ci-dessous vous pouvez modifier les Favoris par défaut.
 </content>

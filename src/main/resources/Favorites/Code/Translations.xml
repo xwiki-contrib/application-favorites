@@ -73,6 +73,9 @@ favorites.modal.title=Manage default Favorites
 favorites.modal.user.title=Manage my Favorites
 favorites.pinned.modal.user.title=Manager my pinned Favorites
 
+# User profile
+favorites.userprofile.menu=My Favorites
+
 # Help
 favorites.help.description=Welcome to the Favorites administration. To activate Favorites you need to either add the Favorites.Code.FavoritesPanel to your list of panels, or to add Favorites.Code.FavoritesMenu as an include in your Menu. Below you can edit the default list of Favorites.</content>
   <object>
