@@ -51,7 +51,12 @@
     #if (!$favDocs)
       #set ($favDocs = [])
     #end
-    #set ($favDocFullName = $xwiki.getDocument($request.docRef).fullName)
+    ## prepare the reference of the doc to add to favorites, relative to the user doc: 
+    ## when single wiki this will always store page fullnames, 
+    ## when multi wiki this will store a mix of fullnames &amp; prefixed fullnames
+    #set ($requestDocRef = $services.model.resolveDocument($request.docRef))
+    #set ($favDocFullName = $services.model.serialize($requestDocRef, 'compactwiki', $userDoc.documentReference))
+    ## add the reference only if it's not already stored
     #if ($favDocs.contains($favDocFullName))
       #set ($message = $services.localization.render('favorites.user.addCurrentPage.alreadyExists'))
       #set ($json = {'message': $message, 'status': 'warning'})

@@ -123,12 +123,13 @@
     </property>
     <property>
       <content>{{velocity}}
-#macro(displayFavoritesList $favoritesList)
+#macro(displayFavoritesList $favoritesList $FavoritesSourceDoc)
 &lt;ul&gt;
 #set ($itemsNumberToDisplay = 5)
 #foreach ($favoritesDocFullName in $favoritesList)
-  #if ($xwiki.exists($favoritesDocFullName))
-    #set ($favoritesDoc = $xwiki.getDocument($favoritesDocFullName))
+  #set ($favoritesDocRef = $services.model.resolveDocument($favoritesDocFullName, $FavoritesSourceDoc.documentReference))
+  #if ($xwiki.exists($favoritesDocRef))
+    #set ($favoritesDoc = $xwiki.getDocument($favoritesDocRef))
     &lt;li #if($foreach.index &gt;= $itemsNumberToDisplay)class="hidden" #end&gt;
       &lt;span class="wikiexternallink"&gt;
         &lt;a href="$!escapetool.xml($favoritesDoc.URL)" target="_blank"&gt;$favoritesDoc.displayTitle&lt;/a&gt;
@@ -144,25 +145,28 @@
 #end
 &lt;/ul&gt;
 #end
+## get the favorites panel document reference, to contextualize everything to this 
+#set ($favoritesPanelDocRef = $paneldoc.documentReference)
+#set ($discard = $services.localization.use('document', "${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.Translations"))
 #panelheader($services.localization.render('favorites.panel.title'))
 ##
 #set ($discard = $xwiki.jsfx.use('uicomponents/suggest/suggestPropertyValues.js', {'forceSkinAction': true, 'language': $xcontext.locale}))
 #set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.bootstrap3.css'),
     {'type': 'text/css', 'rel': 'stylesheet'}))
 #set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
-#set ($discard = $xwiki.ssx.use("Favorites.Code.FavoritesSheet"))
-#set ($discard = $xwiki.jsx.use("Favorites.Code.FavoritesSheet"))
+#set ($discard = $xwiki.ssx.use("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.FavoritesSheet"))
+#set ($discard = $xwiki.jsx.use("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.FavoritesSheet"))
 #set ($userDoc = $xwiki.getDocument($xcontext.user))
 #set ($FavoritesObj = $userDoc.getObject("Favorites.Code.FavoritesClass"))
 #set ($FavoritesSourceDoc = $userDoc)
 #if ("$!FavoritesObj" == '')
-  #set ($FavoritesSourceDoc = $xwiki.getDocument("Favorites.Code.FavoritesTemplate"))
+  #set ($FavoritesSourceDoc = $xwiki.getDocument("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.FavoritesTemplate"))
 #end
 #set ($FavoritesObj = $FavoritesSourceDoc.getObject("Favorites.Code.FavoritesClass"))
 {{html}}
 #if ("$!FavoritesObj" != '')
   #if ($FavoritesObj.getProperty("pinnedPages").value.size() &gt; 0)
-    #displayFavoritesList($FavoritesObj.getProperty("pinnedPages").value)
+    #displayFavoritesList($FavoritesObj.getProperty("pinnedPages").value, $FavoritesSourceDoc)
     #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
       &lt;hr/&gt;
     #else
@@ -170,7 +174,7 @@
     #end
   #end
   #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
-  #displayFavoritesList($FavoritesObj.getProperty("pages").value)
+  #displayFavoritesList($FavoritesObj.getProperty("pages").value, $FavoritesSourceDoc)
   &lt;div class="wikimodel-emptyline"&gt;&lt;/div&gt;
   #end
 #end
@@ -193,8 +197,10 @@
 ## Save the URLs that are used to add/edit FavoritesClass object of the current user in the DOM instead of genrating them on the js extension to avoid cache issues.
 #set ($editUserFavoritesURL = $xwiki.getURL($xcontext.user, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
 #set ($newUserFavoritesObjectURL = $xwiki.getURL($xcontext.user, 'edit', 'xpage=editobject&amp;xaction=addObject&amp;className=Favorites.Code.FavoritesClass'))
+#set ($addFavoriteURL = $xwiki.getURL("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.AddPageToFavoritesService", 'get', 'outputSyntax=plain'))
 &lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
 &lt;input type="hidden" id="newUserFavoritesObjectURL" value="$escapetool.xml($newUserFavoritesObjectURL)"/&gt;
+&lt;input type="hidden" id="addFavoriteURL" value="$escapetool.xml($addFavoriteURL)"/&gt;
 ##
 {{/html}}
 ##

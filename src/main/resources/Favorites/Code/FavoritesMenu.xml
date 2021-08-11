@@ -41,12 +41,13 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 
-#macro(displayFavoritesList $favoritesList)
+#macro(displayFavoritesList $favoritesList $FavoritesSourceDoc)
 #foreach ($FavoritesDocFullName in $favoritesList)
-  #if ($xwiki.exists($FavoritesDocFullName))
-    #set ($FavoritesDoc = $xwiki.getDocument($FavoritesDocFullName))
+  #set ($FavoritesDocRef = $services.model.resolveDocument($FavoritesDocFullName, $FavoritesSourceDoc.documentReference))
+  #if ($xwiki.exists($FavoritesDocRef))
+    #set ($FavoritesDoc = $xwiki.getDocument($FavoritesDocRef))
     #if($FavoritesDoc)
-** [[$FavoritesDoc.displayTitle&gt;&gt;$FavoritesDocFullName]]
+** [[$FavoritesDoc.displayTitle&gt;&gt;$services.model.serialize($FavoritesDocRef)]]
     #end
   #end
 #end
@@ -67,7 +68,7 @@
 * [[Favorites&gt;&gt;Favorites.WebHome]]
 #if ("$!FavoritesObj" != '')
   #if ($FavoritesObj.getProperty("pinnedPages").value.size() &gt; 0)
-    #displayFavoritesList($FavoritesObj.getProperty("pinnedPages").value)
+    #displayFavoritesList($FavoritesObj.getProperty("pinnedPages").value, $FavoritesSourceDoc)
     #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
       ## &lt;hr/&gt;
     #else
@@ -75,7 +76,7 @@
     #end
   #end
   #if ($FavoritesObj.getProperty("pages").value.size() &gt; 0)
-  #displayFavoritesList($FavoritesObj.getProperty("pages").value)
+  #displayFavoritesList($FavoritesObj.getProperty("pages").value, $FavoritesSourceDoc)
    ## &lt;div class="wikimodel-emptyline"&gt;&lt;/div&gt;
   #end
 #end

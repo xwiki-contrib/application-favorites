@@ -495,7 +495,12 @@ XWiki.widgets.FavoritesModalPopup = Class.create(XWiki.widgets.ModalPopup, {
     <property>
       <code>require(['jquery'], function($) {
   $('#addFavorite').click(function() {
-    var url = new XWiki.Document('AddPageToFavoritesService', 'Favorites.Code').getURL('get', 'outputSyntax=plain');
+    var url = '';
+    if ($('#addFavoriteURL').val() &amp;&amp; $('#addFavoriteURL').val() != '') {
+      url = $('#addFavoriteURL').val();
+    } else {
+      url = new XWiki.Document('AddPageToFavoritesService', 'Favorites.Code').getURL('get', 'outputSyntax=plain');
+    }
     var data = {'docRef': this.dataset.doc, 'userRef': this.dataset.user}
     $.post(url, data).success(function(response) {
       new XWiki.widgets.Notification(response.message, response.status);
