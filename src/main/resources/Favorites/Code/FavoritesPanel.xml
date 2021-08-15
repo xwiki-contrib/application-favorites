@@ -197,7 +197,7 @@
 ## Save the URLs that are used to add/edit FavoritesClass object of the current user in the DOM instead of genrating them on the js extension to avoid cache issues.
 #set ($editUserFavoritesURL = $xwiki.getURL($xcontext.user, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
 #set ($newUserFavoritesObjectURL = $xwiki.getURL($xcontext.user, 'edit', 'xpage=editobject&amp;xaction=addObject&amp;className=Favorites.Code.FavoritesClass'))
-#set ($addFavoriteURL = $xwiki.getURL("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.AddPageToFavoritesService", 'get', 'outputSyntax=plain'))
+#set ($addFavoriteURL = $xwiki.getURL("${favoritesPanelDocRef.wikiReference.name}:Favorites.Code.AddRemoveFavoriteService", 'get', 'outputSyntax=plain'))
 &lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
 &lt;input type="hidden" id="newUserFavoritesObjectURL" value="$escapetool.xml($newUserFavoritesObjectURL)"/&gt;
 &lt;input type="hidden" id="addFavoriteURL" value="$escapetool.xml($addFavoriteURL)"/&gt;
