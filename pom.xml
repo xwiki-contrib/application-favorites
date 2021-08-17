@@ -47,9 +47,13 @@
       <id>acotiuga</id>
       <name>Alex Cotiugă</name>
     </developer>
+    <developer>
+      <id>lucaa</id>
+      <name>Anca Luca</name>
+    </developer>
   </developers>
-  <properties>   
+  <properties>
     <xwiki.extension.category>application</xwiki.extension.category>
     <xwiki.issueManagement.jira.id>XFAV</xwiki.issueManagement.jira.id>
-  </properties>  
+  </properties>
 </project>
