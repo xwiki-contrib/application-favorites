@@ -54,7 +54,7 @@
  favorites.default.actions_edit=Редактироваить избранные по умолчанию
  favorites.user.actions_edit=Управление избранным
  favorites.user.tools_access=Access Favorites
- favorites.form.save_button_text=Сохрнаить
+ favorites.form.save_button_text=Сохранить
 
 # Panel keys
  favorites.panel.title=Избранные
