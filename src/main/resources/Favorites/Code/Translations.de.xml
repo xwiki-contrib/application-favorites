@@ -1,1 +1,81 @@
+<?xml version="1.1" encoding="UTF-8"?>
 
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Favorites.Code.Translations" locale="de">
+  <web>Favorites.Code</web>
+  <name>Translations</name>
+  <language>de</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1577833200000</creationDate>
+  <parent>Favorites.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1591716634000</date>
+  <contentUpdateDate>1591716634000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content>favorites.entry.name=Favoriten
+
+# Deprecated keys
+favorites.dataSpace.title=Daten
+favorites.entry.name=Favoriten
+favorites.page.title=Favoriten
+favorites.entry.name=Favoriten
+
+# Deprecated keys
+favorites.dataSpace.title=Daten
+# Live table additional keys
+favorites.default.actions_edit=Standard-Favoriten bearbeiten
+favorites.user.addCurrentPage=Diese Seite hinzufügen
+favorites.user.addCurrentPage.alreadyExists=Die Seite existiert bereits in den Favoriten.
+favorites.user.addRemoveOperation.fail=Aktualisierung der Favoriten fehlgeschlagen.
+favorites.user.addCurrentPage.success=Seite zu den Favoriten hinzugefügt.
+favorites.user.removeCurrentPage.success=Seite von den Favoriten entfernt.
+favorites.user.removeCurrentPage.doesntExist=Die Seite befindet sich nicht in der Liste der Favoriten.
+favorites.user.actions_edit=Favoriten verwalten
+favorites.user.tools_access=Zugang zu den Favoriten
+favorites.user.updateProfile=Favoritenseiten aktualisiert.
+favorites.form.save_button_text=Speichern
+
+
+# Panel keys
+favorites.panel.more={0} mehr ...
+favorites.panel.title=Meine Favoriten
+
+# Modal popup keys
+favorites.modal.title=Standard-Favoriten verwalten
+favorites.modal.user.title=Meine Favoriten verwalten
+favorites.pinned.modal.user.title=Manager meiner gepinnten Favoriten
+
+# User profile
+favorites.userprofile.menu=Meine Favoriten
+
+# Help
+favorites.help.description=Willkommen bei der Favoritenverwaltung. Um Favoriten zu aktivieren, muss entweder das Favorites.Code.FavoritesPanel zur Liste der Panels hinzugefügt oder Favorites.Code.FavoritesMenu als Include ins Menü aufgenommen werden. Unten kann die Standardliste der Favoriten bearbeitet werden.
+</content>
+  </xwikidoc>
