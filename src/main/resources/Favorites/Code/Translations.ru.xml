@@ -51,7 +51,7 @@
 # Deprecated keys
  favorites.dataSpace.title=Data
  # Live table additional keys
- favorites.default.actions_edit=Редактироваить избранные по умолчанию
+ favorites.default.actions_edit=Редактировать избранные по умолчанию
  favorites.user.actions_edit=Управление избранным
  favorites.user.tools_access=Access Favorites
  favorites.form.save_button_text=Сохранить
@@ -68,5 +68,5 @@
 favorites.userprofile.menu=Избранные
 
 # Help
- favorites.help.description= Добро пожаловать в Управление избранным. Для того что бы активировать Избранное вам нужно добавить Favorites.Code.FavoritesPanel в список ваших панелей или добавить Favorites.Code.FavoritesMenu в ваше меню. Ниже вы можете редактирвоать список Избранного по умолчанию.</content>
+ favorites.help.description= Добро пожаловать в Управление избранным. Для того, что бы активировать Избранное, вам нужно добавить Favorites.Code.FavoritesPanel в список ваших панелей или добавить Favorites.Code.FavoritesMenu в ваше меню. Ниже вы можете редактирвоать список Избранного по умолчанию.</content>
 </xwikidoc>
