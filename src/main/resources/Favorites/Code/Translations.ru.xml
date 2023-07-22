@@ -40,33 +40,49 @@
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
   <content># Other keys
- favorites.entry.name=Избранные
+favorites.entry.name=Избранные
 
 # Deprecated keys
- favorites.dataSpace.title=Data
+favorites.dataSpace.title=Данные
+# Other keys
+favorites.entry.name=Избранные
 
  # Other keys
- favorites.page.title=Избранные
+favorites.page.title=Избранные
+# Other keys
+favorites.entry.name=Избранные
 
 # Deprecated keys
- favorites.dataSpace.title=Data
+favorites.dataSpace.title=Данные
  # Live table additional keys
- favorites.default.actions_edit=Редактировать избранные по умолчанию
- favorites.user.actions_edit=Управление избранным
- favorites.user.tools_access=Access Favorites
- favorites.form.save_button_text=Сохранить
+favorites.default.actions_edit=Редактировать избранные по умолчанию
+favorites.user.addCurrentPage=Добавить эту страницу
+favorites.user.addCurrentPage.alreadyExists=Страница уже в избранных.
+favorites.user.addRemoveOperation.fail=Не удалось обновить избранные.
+favorites.user.addCurrentPage.success=Страница добавлена в избранные.
+favorites.user.removeCurrentPage.success=Страница удалена из избранных.
+favorites.user.removeCurrentPage.doesntExist=Страницы нет в списке избранных.
+favorites.user.actions_edit=Управление избранными
+favorites.user.tools_access=Доступ к избранным
+favorites.user.updateProfile=Избранные страницы обновлены.
+favorites.form.save_button_text=Сохранить
+
 
 # Panel keys
- favorites.panel.title=Избранные
+favorites.panel.more=еще {0} ...
+
+# Panel keys
+favorites.panel.title=Мои избранные
 
 # Modal popup keys
- favorites.modal.title=Управление избранным по умолчанию
- favorites.modal.user.title=Управление избранным
- favorites.pinned.modal.user.title=Manager my pinned Favorites
+favorites.modal.title=Управление избранным по умолчанию
+favorites.modal.user.title=Управление моим избранным
+favorites.pinned.modal.user.title=Управление закрепленным избранным
 
 # User profile
-favorites.userprofile.menu=Избранные
+favorites.userprofile.menu=Мои избранные
 
 # Help
- favorites.help.description= Добро пожаловать в Управление избранным. Для того, что бы активировать Избранное, вам нужно добавить Favorites.Code.FavoritesPanel в список ваших панелей или добавить Favorites.Code.FavoritesMenu в ваше меню. Ниже вы можете редактирвоать список Избранного по умолчанию.</content>
+favorites.help.description=Добро пожаловать в Управление избранным. Для того, что бы активировать Избранное, вам нужно добавить Favorites.Code.FavoritesPanel в список ваших панелей или добавить Favorites.Code.FavoritesMenu в ваше меню. Ниже вы можете редактировать список Избранного по умолчанию.
+</content>
 </xwikidoc>
