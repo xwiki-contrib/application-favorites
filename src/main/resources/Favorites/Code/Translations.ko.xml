@@ -60,7 +60,7 @@ favorites.user.removeCurrentPage.doesntExist=페이지가 즐겨찾기 목록에
 favorites.user.actions_edit=즐겨찾기 관리
 favorites.user.tools_access=즐겨찾기에 액세스
 favorites.user.updateProfile=즐겨찾는 페이지가 업데이트되었습니다.
-favorites.form.save_button_text=구하다
+favorites.form.save_button_text=저장
 
 
 # Panel keys
