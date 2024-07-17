@@ -182,7 +182,7 @@
   &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
   $!services.localization.render('favorites.user.actions_edit')
 &lt;/a&gt;
-&lt;button class="btn btn-default" id="addFavorite" data-doc="$doc.documentReference" data-user="$xcontext.userReference"&gt;
+&lt;button class="btn btn-default" id="addFavorite" data-doc="$escapetool.xml($doc.documentReference)" data-user="$xcontext.userReference"&gt;
   &lt;span class="glyphicon glyphicon-plus"&gt;&lt;/span&gt;
   $services.localization.render('favorites.user.addCurrentPage')
 &lt;/button&gt;
