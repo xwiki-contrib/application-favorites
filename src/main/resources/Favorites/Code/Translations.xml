@@ -84,7 +84,10 @@ favorites.help.description=Welcome to the Favorites administration. To activate 
 # More option menu button
 favorites.moreOptions.add=Add to favorites
 favorites.moreOptions.remove=Remove from favorites
-</content>
+
+# Macro
+rendering.macro.favorites.name=Favorites
+rendering.macro.favorites.description=List all favorite pages of a user</content>
   <object>
     <name>Favorites.Code.Translations</name>
     <number>0</number>
