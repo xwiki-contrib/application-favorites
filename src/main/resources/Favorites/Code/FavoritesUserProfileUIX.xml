@@ -135,6 +135,17 @@
     #end
   #end
 #end
+
+#set ($discard = $xwiki.ssx.use("Favorites.Code.FavoritesSheet"))
+#set ($discard = $xwiki.jsx.use("Favorites.Code.FavoritesSheet"))
+{{html clean="false"}}
+&lt;a href="javascript:;" class="btn btn-default editFavorites isUser"&gt;
+  &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
+  $!services.localization.render('favorites.user.actions_edit')
+&lt;/a&gt;
+#set ($editUserFavoritesURL = $xwiki.getURL($xcontext.user, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
+&lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
+{{/html}}
 {{/velocity}}</content>
     </property>
     <property>
