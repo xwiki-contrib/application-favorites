@@ -51,6 +51,10 @@
       <id>lucaa</id>
       <name>Anca Luca</name>
     </developer>
+    <developer>
+      <id>JosueTille</id>
+      <name>Josué Tille</name>
+    </developer>
   </developers>
   <properties>
     <xwiki.extension.category>application</xwiki.extension.category>
