@@ -27,12 +27,9 @@
   <defaultLanguage>en</defaultLanguage>
   <translation>1</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1577833200000</creationDate>
   <parent>Favorites.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1591716634000</date>
-  <contentUpdateDate>1591716634000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -78,4 +75,4 @@ favorites.userprofile.menu=내가 좋아하는 것들
 # Help
 favorites.help.description=변경 요청 에서 기존 변경 사항이 새로 고쳐졌습니다.
 </content>
-  </xwikidoc>
+</xwikidoc>

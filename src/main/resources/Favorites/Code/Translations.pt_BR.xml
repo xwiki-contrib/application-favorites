@@ -27,12 +27,9 @@
   <defaultLanguage>en</defaultLanguage>
   <translation>1</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1577833200000</creationDate>
   <parent>Favorites.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1591716634000</date>
-  <contentUpdateDate>1591716634000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -78,4 +75,4 @@ favorites.userprofile.menu=Meus favoritos
 # Help
 favorites.help.description=Bem-vindo à administração dos Favoritos. Para ativar Favoritos, você precisa adicionar Favorites.Code.FavoritesPanel à sua lista de painéis ou adicionar Favorites.Code.FavoritesMenu como um include em seu Menu. Abaixo você pode editar a lista padrão de Favoritos.
 </content>
-  </xwikidoc>
+</xwikidoc>
