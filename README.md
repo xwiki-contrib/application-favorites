@@ -10,5 +10,5 @@ This application allows to show a list of favorite pages from the Wiki in a Pane
 * Communication: [Forum](https://forum.xwiki.org/c/Devs>), [IRC](https://dev.xwiki.org/xwiki/bin/view/Community/IRC>) 
 * Minimal XWiki version supported: 12.10
 * License: LGPL 2.1
-* [Translations](https://l10n.xwiki.org/projects/xwiki-contrib/ffavorites-application/)
+* [Translations](https://l10n.xwiki.org/projects/xwiki-contrib/favorites-application/)
 * Continuous Integration Status: [![Build Status](http://ci.xwiki.org/job/XWiki%20Contrib/job/application-favorites/job/master/badge/icon)](http://ci.xwiki.org/job/XWiki%20Contrib/job/application-favorites/job/master/) 
