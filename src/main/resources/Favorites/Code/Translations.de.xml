@@ -74,5 +74,13 @@ favorites.userprofile.menu=Meine Favoriten
 
 # Help
 favorites.help.description=Willkommen bei der Favoritenverwaltung. Um Favoriten zu aktivieren, muss entweder das Favorites.Code.FavoritesPanel zur Liste der Panels hinzugefügt oder Favorites.Code.FavoritesMenu als Include ins Menü aufgenommen werden. Unten kann die Standardliste der Favoriten bearbeitet werden.
+
+# More option menu button
+favorites.moreOptions.add=Zu Favoriten hinzufügen
+favorites.moreOptions.remove=Aus Favoriten löschen
+
+# Macro
+rendering.macro.favorites.name=Favoriten
+rendering.macro.favorites.description=Alle Favoritenseiten eines Benutzers auflisten
 </content>
 </xwikidoc>
