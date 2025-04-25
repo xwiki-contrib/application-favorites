@@ -120,6 +120,8 @@
     </property>
     <property>
       <content>{{velocity}}
+#set ($discard = $xwiki.ssx.use("Favorites.Code.FavoritesSheet"))
+#set ($discard = $xwiki.jsx.use("Favorites.Code.FavoritesSheet"))
 =$escapetool.xml($services.localization.render("favorites.userprofile.menu"))=
 ## TODO: implement fancy livetable
 #set($favoritesObj = $doc.getObject('Favorites.Code.FavoritesClass'))
@@ -133,16 +135,16 @@
   #end
 #end
 
-#set ($discard = $xwiki.ssx.use("Favorites.Code.FavoritesSheet"))
-#set ($discard = $xwiki.jsx.use("Favorites.Code.FavoritesSheet"))
-{{html clean="false"}}
-&lt;a href="javascript:;" class="btn btn-default editFavorites isUser"&gt;
-  &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
-  $!services.localization.render('favorites.user.actions_edit')
-&lt;/a&gt;
-#set ($editUserFavoritesURL = $xwiki.getURL($xcontext.user, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
-&lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
-{{/html}}
+#if ($services.security.authorization.hasAccess('edit', $doc))
+  {{html clean="false"}}
+  &lt;a href="javascript:;" class="btn btn-default editFavorites isUser"&gt;
+    &lt;span class="glyphicon glyphicon-edit" aria-hidden="true"&gt;&lt;/span&gt;
+    $!services.localization.render('favorites.user.actions_edit')
+  &lt;/a&gt;
+  #set ($editUserFavoritesURL = $xwiki.getURL($doc.documentReference, 'get', 'sheet=Favorites.Code.FavoritesSheet'))
+  &lt;input type="hidden" id="editUserFavoritesURL" value="$escapetool.xml($editUserFavoritesURL)"/&gt;
+  {{/html}}
+#end
 {{/velocity}}</content>
     </property>
     <property>
