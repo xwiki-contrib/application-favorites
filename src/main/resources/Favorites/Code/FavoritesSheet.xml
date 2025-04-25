@@ -161,17 +161,12 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>/* require.config({
+      <code>require.config({
   paths: {
-    'selectize': "$services.webjars.url('select2', 'js/select2.min.js')"
-  },
-  shim: {
-    'selectize': {
-        deps: ['jquery'],
-        exports: 'Select2'
-    }
+    'xwiki-suggestPropertyValues': "$xwiki.getSkinFile('uicomponents/suggest/suggestPropertyValues.js', true)" +
+      "?v=$escapetool.url($xwiki.version)"
   }
-}); */
+});
 
 require(['jquery', 'xwiki-suggestPropertyValues'], function($){
   function loadCss(url) {
