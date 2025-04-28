@@ -285,40 +285,57 @@
       <async_enabled>0</async_enabled>
     </property>
     <property>
-      <content>{{velocity}}{{html clean="false"}}
+      <content>{{velocity}}
+{{html clean="false"}}
 #if (!$doc.isNew())
   #template('menus_macros.vm')
   #set ($uiExtensionDocRef = $uix.doc.documentReference)
-  #set ($discard = $services.localization.use('document', "${uiExtensionDocRef.wikiReference.name}:Favorites.Code.Translations"))
-  #set ($discard = $xwiki.jsx.use($services.model.serialize($uiExtensionDocRef)))
-  #set ($addFavoriteURL = $xwiki.getURL("${uiExtensionDocRef.wikiReference.name}:Favorites.Code.AddRemoveFavoriteService", 'get', 'outputSyntax=plain'))
-  #set ($dataParameters = "data-doc=${escapetool.q}$escapetool.xml($doc.documentReference)${escapetool.q}
-    data-user=${escapetool.q}$xcontext.userReference${escapetool.q}
-    data-edit-url=${escapetool.q}$escapetool.xml($addFavoriteURL)${escapetool.q}")
-  #set ($pageInFavorite = false)
-  ## get the user document for which we're getting list of documents
-  #set ($userDoc = $xwiki.getDocument($xcontext.userReference))
-  #set ($favObj = $userDoc.getObject("${uiExtensionDocRef.wikiReference.name}:Favorites.Code.FavoritesClass"))
-  #if ($favObj != $NULL)
-    #set ($favDocs = $favObj.getValue('pages'))
-    #if ($favDocs &amp;&amp; $favDocs.contains($services.model.serialize($doc.documentReference, 'compactwiki', $userDoc.documentReference)))
-      #set ($pageInFavorite = true)
+  ## Support for XWiki 12.10, can be removed when the parent version is increased.
+  #if ("$!uiExtensionDocRef" == '')
+    #set ($uiExtensionDocRef = $uix.documentReference)
+  #end
+  #set ($localUiExtensionDocRef = $services.model.serialize($uiExtensionDocRef, 'local'))
+  #set ($currentWikiName = $doc.documentReference.wikiReference.name)
+  #set ($uiExtensionWikiName = $uiExtensionDocRef.wikiReference.name)
+  ## Since this UIExtension' scope is global, and in a multiwiki environment the extension can be installed in multiple wikis,
+  ## the following code should be executed only once and produce a single entry in the More Actions menu.
+  ## There are 3 different cases:
+  ## 1. the current wiki is the main wiki, use the current (main) wiki's eu extension
+  ## 2. the current subwiki has the Favorites app installed, use the current wiki's ui extension
+  ## 3. the current subwiki doesn't have the Favorites app installed, relying on the main wiki's ui extension
+  #if ((!$xwiki.exists($localUiExtensionDocRef) &amp;&amp; $uiExtensionWikiName == $xcontext.mainWikiName)  || ($xwiki.exists($localUiExtensionDocRef) &amp;&amp; $currentWikiName == $uiExtensionWikiName))
+    #set ($discard = $services.localization.use('document', "${uiExtensionWikiName}:Favorites.Code.Translations"))
+    #set ($discard = $xwiki.jsx.use($services.model.serialize($uiExtensionDocRef)))
+    #set ($addFavoriteURL = $xwiki.getURL("${uiExtensionWikiName}:Favorites.Code.AddRemoveFavoriteService", 'get', 'outputSyntax=plain'))
+    #set ($dataParameters = "data-doc=${escapetool.q}$escapetool.xml($doc.documentReference)${escapetool.q}
+      data-user=${escapetool.q}$xcontext.userReference${escapetool.q}
+      data-edit-url=${escapetool.q}$escapetool.xml($addFavoriteURL)${escapetool.q}")
+    #set ($pageInFavorite = false)
+    ## get the user document for which we're getting list of documents
+    #set ($userDoc = $xwiki.getDocument($xcontext.userReference))
+    #set ($favObj = $userDoc.getObject("${uiExtensionWikiName}:Favorites.Code.FavoritesClass"))
+    #if ($favObj != $NULL)
+      #set ($favDocs = $favObj.getValue('pages'))
+      #if ($favDocs &amp;&amp; $favDocs.contains($services.model.serialize($doc.documentReference, 'compactwiki', $userDoc.documentReference)))
+        #set ($pageInFavorite = true)
+      #end
+    #end
+    #if (!$pageInFavorite)
+      #submenuitem('#', $services.localization.render('favorites.moreOptions.add'), 'addFavoriteMenu', '', 'star', $dataParameters)
+    #else
+      ## Need to had code the submenu because we can't use from standard XWiki theme the fa-star-o icon
+      #set($linkName = $services.localization.render('favorites.moreOptions.remove'))
+      &lt;li&gt;
+        &lt;a href="#" id="dropFavoriteMenu" title="$escapetool.xml($linkName)"
+          $dataParameters&gt;
+          &lt;span class="fa fa-star-o" aria-hidden="true"&gt;&lt;/span&gt; $escapetool.xml($linkName)
+        &lt;/a&gt;
+      &lt;/li&gt;
     #end
   #end
-  #if (!$pageInFavorite)
-    #submenuitem('#', $services.localization.render('favorites.moreOptions.add'), 'addFavoriteMenu', '', 'star', $dataParameters)
-  #else
-    ## Need to had code the submenu because we can't use from standard XWiki theme the fa-star-o icon
-    #set($linkName = $services.localization.render('favorites.moreOptions.remove'))
-    &lt;li&gt;
-      &lt;a href="#" id="dropFavoriteMenu" title="$escapetool.xml($linkName)"
-        $dataParameters&gt;
-        &lt;span class="fa fa-star-o" aria-hidden="true"&gt;&lt;/span&gt; $escapetool.xml($linkName)
-      &lt;/a&gt;
-    &lt;/li&gt;
-  #end
 #end
-{{/html}}{{/velocity}}</content>
+{{/html}}
+{{/velocity}}</content>
     </property>
     <property>
       <extensionPointId>org.xwiki.plaftorm.moreoptions</extensionPointId>
