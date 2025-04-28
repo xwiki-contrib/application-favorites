@@ -28,7 +28,7 @@
   </parent>
   <groupId>org.xwiki.contrib</groupId>
   <artifactId>application-favorites</artifactId>
-  <version>1.3.1</version>
+  <version>1.3.2-SNAPSHOT</version>
   <packaging>xar</packaging>
   <name>Favorites Application</name>
   <description>Application to manage a panel or menu with a list of Favorite pages.</description>
@@ -36,7 +36,7 @@
     <connection>scm:git:git://github.com/xwiki-contrib/application-favorites.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-favorites.git</developerConnection>
     <url>https://github.com/xwiki-contrib/application-favorites</url>
-    <tag>application-favorites-1.3.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <developers>
     <developer>
