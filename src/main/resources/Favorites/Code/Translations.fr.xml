@@ -36,13 +36,10 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content># Other keys
-favorites.entry.name=Favoris
+  <content>favorites.entry.name=Favoris
 
 # Deprecated keys
 favorites.dataSpace.title=Data
-
- # Other keys
 favorites.entry.name=Favoris
 favorites.page.title=Favoris
 favorites.entry.name=Favoris
@@ -51,13 +48,13 @@ favorites.entry.name=Favoris
 favorites.dataSpace.title=Data
 # Live table additional keys
 favorites.default.actions_edit=Modifier les Favoris par défaut
-favorites.user.actions_edit=Gérer les Favoris
 favorites.user.addCurrentPage=Ajouter cette page
 favorites.user.addCurrentPage.alreadyExists=La page existe déjà dans les favoris.
 favorites.user.addRemoveOperation.fail=Échec de la mise à jour des favoris.
 favorites.user.addCurrentPage.success=Page ajoutée aux favoris.
 favorites.user.removeCurrentPage.success=Page enlevée des favoris.
 favorites.user.removeCurrentPage.doesntExist=La page n'existe pas dans les favoris.
+favorites.user.actions_edit=Gérer les Favoris
 favorites.user.tools_access=Accéder aux Favoris
 favorites.user.updateProfile=Pages favorites mises à jour.
 favorites.form.save_button_text=Sauvegarder
@@ -76,5 +73,13 @@ favorites.userprofile.menu=Mes Favoris
 
 # Help
 favorites.help.description=Bienvenue sur l'administration des Favoris. Pour activer les Favoris vous devez ajouter le panneau Favorites.Code.FavoritesPanel dans les panneaux lateraux dans l'administration, ou ajouter la page Favorites.Code.FavoritesMenu par inclusion dans un Menu. Ci-dessous vous pouvez modifier les Favoris par défaut.
+
+# More option menu button
+favorites.moreOptions.add=Ajouter aux favoris
+favorites.moreOptions.remove=Retirer des favoris
+
+# Macro
+rendering.macro.favorites.name=Favoris
+rendering.macro.favorites.description=Liste des pages favorites d'un utilisateur
 </content>
 </xwikidoc>
