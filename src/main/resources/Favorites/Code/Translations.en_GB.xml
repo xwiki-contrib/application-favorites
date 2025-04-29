@@ -1,0 +1,88 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Favorites.Code.Translations" locale="en_GB">
+  <web>Favorites.Code</web>
+  <name>Translations</name>
+  <language>en_GB</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>Favorites.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content># Other keys
+favorites.entry.name=Favourites
+
+# Deprecated keys
+favorites.dataSpace.title=Data
+
+ # Other keys
+favorites.entry.name=Favourites
+favorites.page.title=Favourites
+favorites.entry.name=Favourites
+
+# Deprecated keys
+favorites.dataSpace.title=Data
+# Live table additional keys
+favorites.default.actions_edit=Edit Default Favourites
+favorites.user.addCurrentPage=Add this page
+favorites.user.addCurrentPage.alreadyExists=Page already exists in favourites.
+favorites.user.addRemoveOperation.fail=Failed to update favourites.
+favorites.user.addCurrentPage.success=Page added to favourites.
+favorites.user.removeCurrentPage.success=Page removed from favourites.
+favorites.user.removeCurrentPage.doesntExist=The page is not in the list of favourites.
+favorites.user.actions_edit=Manage Favourites
+favorites.user.tools_access=Access Favourites
+favorites.user.updateProfile=Favorite pages updated.
+favorites.form.save_button_text=Save
+
+
+# Panel keys
+favorites.panel.more={0} more ...
+favorites.panel.title=My Favourites
+
+# Modal popup keys
+favorites.modal.title=Manage default Favourites
+favorites.modal.user.title=Manage my Favourites
+favorites.pinned.modal.user.title=Manager my pinned Favourites
+
+# User profile
+favorites.userprofile.menu=My Favourites
+
+# Help
+favorites.help.description=Welcome to the Favourites administration. To activate Favourites you need to either add the Favorites.Code.FavoritesPanel to your list of panels, or to add Favorites.Code.FavoritesMenu as an include in your Menu. Below you can edit the default list of Favourites.
+
+# More option menu button
+favorites.moreOptions.add=Add to favourites
+favorites.moreOptions.remove=Remove from favourites
+
+# Macro
+rendering.macro.favorites.name=Favourites
+rendering.macro.favorites.description=List all favorite pages of a user</content>
+</xwikidoc>
