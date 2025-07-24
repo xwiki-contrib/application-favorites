@@ -44,50 +44,15 @@
   #end
   #if ("$!request.docRef" != '' &amp;&amp; $xcontext.userReference == $request.userRef)
     ## get the user document for which we're making changes
-    #set ($userDoc = $xwiki.getDocument($request.userRef))
     ## prepare the reference of the doc to add to favorites, relative to the user doc:
     ## when single wiki this will always store page fullnames,
     ## when multi wiki this will store a mix of fullnames &amp; prefixed fullnames
     #set ($requestDocRef = $services.model.resolveDocument($request.docRef))
     #set ($favDocFullName = $services.model.serialize($requestDocRef, 'compactwiki', $userDoc.documentReference))
     #if ($actionToPerform == 'add')
-      #if ($xwiki.exists($request.docRef))
-        ## Create the favorites object if it does not exist.
-        #set ($favObj = $userDoc.getObject('Favorites.Code.FavoritesClass', true))
-        #set ($favDocs = $favObj.getValue('pages'))
-        ## Initialize the list of favorite documents upon object creation.
-        #if (!$favDocs)
-          #set ($favDocs = [])
-        #end
-        ## add the reference only if it's not already stored
-        #if ($favDocs.contains($favDocFullName))
-          #set ($message = $services.localization.render('favorites.user.addCurrentPage.alreadyExists'))
-          #set ($json = {'message': $message, 'status': 'warning'})
-        #else
-          #set ($discard = $favDocs.add($favDocFullName))
-          #set ($discard = $favObj.set('pages', $favDocs))
-          #set ($discard = $userDoc.save($services.localization.render('favorites.user.updateProfile')))
-          #set ($message = $services.localization.render('favorites.user.addCurrentPage.success'))
-          #set ($json = {'message': $message, 'status': 'done'})
-        #end
-      #else
-        #set ($message = $services.localization.render('favorites.user.addCurrentPage.fail'))
-        #set ($json = {'message': $message, 'status': 'error'})
-      #end
+      #set ($json = $services.favorites.add($xcontext.userReference, $requestDocRef))
     #elseif ($actionToPerform == 'remove')
-      ## remove this reference from the user favorites, if it's there
-      #set ($favObj = $userDoc.getObject('Favorites.Code.FavoritesClass'))
-      #set ($favDocs = $favObj.getValue('pages'))
-      #if ($favDocs &amp;&amp; $favDocs.contains($favDocFullName))
-        #set($discard = $favDocs.remove($favDocFullName))
-        #set($discard = $favObj.set('pages', $favDocs))
-        #set ($discard = $userDoc.save($services.localization.render('favorites.user.updateProfile')))
-        #set ($message = $services.localization.render('favorites.user.removeCurrentPage.success'))
-        #set ($json = {'message': $message, 'status': 'done'})
-      #else
-        #set ($message = $services.localization.render('favorites.user.removeCurrentPage.doesntExist'))
-        #set ($json = {'message': $message, 'status': 'warning'})
-      #end
+     #set ($json = $services.favorites.remove($xcontext.userReference, $requestDocRef))
     #end
   #else
     #set ($message = $services.localization.render('favorites.user.addRemoveOperation.fail'))
