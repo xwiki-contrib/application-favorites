@@ -60,6 +60,8 @@
     <xwiki.issueManagement.jira.id>XFAV</xwiki.issueManagement.jira.id>
   </properties>
   <modules>
+    <module>application-favorites-filter-api</module>
+    <module>application-favorites-default</module>
     <module>application-favorites-ui</module>
   </modules>
 </project>

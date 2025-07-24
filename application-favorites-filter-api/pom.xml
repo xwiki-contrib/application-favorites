@@ -25,18 +25,18 @@
     <artifactId>application-favorites-parent</artifactId>
     <version>1.3.2-SNAPSHOT</version>
   </parent>
-  <artifactId>application-favorites-default</artifactId>
-  <name>Application Favorites - Default implementation</name>
+  <artifactId>application-favorites-filter-api</artifactId>
+  <name>Application Favorites - Filter API</name>
   <dependencies>
     <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-oldcore</artifactId>
-      <version>${platform.version}</version>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-filter-api</artifactId>
+      <version>${commons.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.xwiki.contrib</groupId>
-      <artifactId>application-favorites-filter-api</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-user-api</artifactId>
+      <version>${platform.version}</version>
     </dependency>
   </dependencies>
 </project>
