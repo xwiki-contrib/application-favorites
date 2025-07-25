@@ -19,10 +19,8 @@
  */
 package org.xwiki.contrib.favorites.script;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -31,17 +29,13 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import org.xwiki.component.annotation.Component;
+import org.xwiki.contrib.favorites.FavoriteManager;
+import org.xwiki.contrib.favorites.FavoritesException;
 import org.xwiki.localization.ContextualLocalizationManager;
 import org.xwiki.model.reference.DocumentReference;
-import org.xwiki.model.reference.EntityReferenceSerializer;
-import org.xwiki.model.reference.LocalDocumentReference;
 import org.xwiki.script.service.ScriptService;
 
-import com.xpn.xwiki.XWiki;
 import com.xpn.xwiki.XWikiContext;
-import com.xpn.xwiki.XWikiException;
-import com.xpn.xwiki.doc.XWikiDocument;
-import com.xpn.xwiki.objects.BaseObject;
 
 /**
  * Favorites Script service.
@@ -50,92 +44,72 @@ import com.xpn.xwiki.objects.BaseObject;
  */
 @Component
 @Singleton
+@Named("favorites")
 public class FavoritesScriptService implements ScriptService
 {
-    private static final LocalDocumentReference FAVORITES_CLASS_REF =
-        new LocalDocumentReference(Arrays.asList("Favorites", "Code"), "FavoritesClass");
-
-    private static final String PAGES = "pages";
-
-    private static final String FAVORITES_USER_UPDATE_PROFILE = "favorites.user.updateProfile";
     private static final String DONE = "done";
     private static final String WARNING = "warning";
+    private static final String FAVORITES_USER_UPDATE_PROFILE = "favorites.user.updateProfile";
 
-    @Inject
-    private Provider<XWikiContext> xcontextProvider;
+    private static final String ERROR = "error";
+    private static final String FAVORITES_USER_ADD_CURRENT_PAGE_FAIL = "favorites.user.addCurrentPage.fail";
 
     @Inject
     private ContextualLocalizationManager l10n;
 
     @Inject
-    @Named("compactwiki")
-    private EntityReferenceSerializer<String> compactWikiSerializer;
+    private FavoriteManager favoriteManager;
+
+    @Inject
+    private Provider<XWikiContext> xcontextProvider;
 
     /**
-     * @param userReference the user for which to add the favorite
+     * @param userRef the user for which to add the favorite
      * @param docRef the entity to favorite (for now, only documents)
      * @return a map with a success and a status members, for JSON serialization
      */
-    public Map<String, String> add(DocumentReference userReference, DocumentReference docRef) throws XWikiException
+    public Map<String, String> add(DocumentReference userRef, DocumentReference docRef) throws FavoritesException
     {
         XWikiContext context = xcontextProvider.get();
-        XWiki xwiki = context.getWiki();
-        XWikiDocument userDoc = xwiki.getDocument(userReference, context);
-
-        if (!xwiki.exists(docRef, context) || userDoc.isNew()) {
-            return getStatusObject(l10n.getTranslationPlain("favorites.user.addCurrentPage.fail"), "error");
+        if (!context.getWiki().exists(docRef, context)) {
+            return getStatus(l10n.getTranslationPlain(FAVORITES_USER_ADD_CURRENT_PAGE_FAIL), ERROR, null);
         }
 
-        // Create the favorites object if it does not exist.
-        BaseObject favObj = userDoc.getXObject(FAVORITES_CLASS_REF, true, context);
-
-        List<String> favDocs = favObj.getListValue(PAGES);
-        if (favDocs == null) {
-            // Initialize the list of favorite documents upon object creation.
-            favDocs = new ArrayList<>();
+        if (favoriteManager.has(userRef, docRef)) {
+            return getStatus(l10n.getTranslationPlain("favorites.user.addCurrentPage.alreadyExists"), WARNING, null);
         }
 
-        String favDocFullName = compactWikiSerializer.serialize(docRef, userReference);
-        if (favDocs.contains(favDocFullName)) {
-            // add the reference only if it 's not already stored
-            return getStatusObject(l10n.getTranslationPlain("favorites.user.addCurrentPage.alreadyExists"), WARNING);
+        String saveComment = l10n.getTranslationPlain(FAVORITES_USER_UPDATE_PROFILE);
+        try {
+            favoriteManager.addAll(userRef, Collections.singletonList(docRef), saveComment);
+            return getStatus(l10n.getTranslationPlain("favorites.user.addCurrentPage.success"), DONE, null);
+        } catch (FavoritesException e) {
+            return getStatus(l10n.getTranslationPlain(FAVORITES_USER_ADD_CURRENT_PAGE_FAIL), ERROR, e);
         }
-
-        favDocs.add(favDocFullName);
-        favObj.setStringListValue(PAGES, favDocs);
-        xwiki.saveDocument(userDoc, l10n.getTranslationPlain(FAVORITES_USER_UPDATE_PROFILE), context);
-        return getStatusObject(l10n.getTranslationPlain("favorites.user.addCurrentPage.success"), DONE);
     }
 
     /**
-     * @param userReference the user for which to remove the favorite
+     * @param userRef the user for which to remove the favorite
      * @param docRef the entity to unfavorite (for now, only documents)
      * @return a map with a success and a status members, for JSON serialization
      */
-    public Map<String, String> remove(DocumentReference userReference, DocumentReference docRef) throws XWikiException
+    public Map<String, String> remove(DocumentReference userRef, DocumentReference docRef) throws FavoritesException
     {
-        XWikiContext context = xcontextProvider.get();
-        XWiki xwiki = context.getWiki();
-        XWikiDocument userDoc = xwiki.getDocument(userReference, context);
-        BaseObject favObj = userDoc.getXObject(FAVORITES_CLASS_REF, false, context);
-        String favDocFullName = compactWikiSerializer.serialize(docRef, userReference);
-        List<String> favDocs = favObj == null ? null : favObj.getListValue(PAGES);
-        int favIndex = favDocs == null ? -1 : favDocs.indexOf(favDocFullName);
-        if (favIndex == -1) {
-            return getStatusObject(l10n.getTranslationPlain("favorites.user.removeCurrentPage.doesntExist"), WARNING);
+        String saveComment = l10n.getTranslationPlain(FAVORITES_USER_UPDATE_PROFILE);
+        if (!favoriteManager.removeAll(userRef, Collections.singletonList(docRef), saveComment)) {
+            return getStatus(l10n.getTranslationPlain("favorites.user.removeCurrentPage.doesntExist"), WARNING, null);
         }
-
-        favDocs.remove(favIndex);
-        favObj.set(PAGES, favDocs, context);
-        xwiki.saveDocument(userDoc, l10n.getTranslationPlain(FAVORITES_USER_UPDATE_PROFILE), context);
-        return getStatusObject(l10n.getTranslationPlain("favorites.user.removeCurrentPage.success"), DONE);
+        return getStatus(l10n.getTranslationPlain("favorites.user.removeCurrentPage.success"), DONE, null);
     }
 
-    private static Map<String, String> getStatusObject(String message, String status)
+    private static Map<String, String> getStatus(String message, String status, Exception cause)
     {
-        Map<String, String> s = new LinkedHashMap<>(2);
+        Map<String, String> s = new LinkedHashMap<>(cause == null ? 2 : 3);
         s.put("message", message);
         s.put("status", status);
+        if (cause != null) {
+            s.put("reason", cause.getMessage());
+        }
         return s;
     }
 }

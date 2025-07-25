@@ -48,7 +48,6 @@
     ## when single wiki this will always store page fullnames,
     ## when multi wiki this will store a mix of fullnames &amp; prefixed fullnames
     #set ($requestDocRef = $services.model.resolveDocument($request.docRef))
-    #set ($favDocFullName = $services.model.serialize($requestDocRef, 'compactwiki', $userDoc.documentReference))
     #if ($actionToPerform == 'add')
       #set ($json = $services.favorites.add($xcontext.userReference, $requestDocRef))
     #elseif ($actionToPerform == 'remove')

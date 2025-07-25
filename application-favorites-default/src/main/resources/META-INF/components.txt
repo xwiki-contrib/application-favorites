@@ -1,1 +1,2 @@
 org.xwiki.contrib.favorites.script.FavoritesScriptService
+org.xwiki.contrib.favorites.internal.DefaultFavoriteManager
