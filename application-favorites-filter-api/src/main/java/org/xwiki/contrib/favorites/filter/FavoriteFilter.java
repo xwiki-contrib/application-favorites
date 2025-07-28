@@ -30,7 +30,7 @@ import org.xwiki.user.UserReference;
  * @since 1.4.0
  * @version $Id$
  */
-public interface EntityFavoriteFilter
+public interface FavoriteFilter
 {
     // Events
 
@@ -51,5 +51,14 @@ public interface EntityFavoriteFilter
      * @throws FilterException if something wrong happens
      */
     void onUserFavorite(UserReference userRef, @Default("") FilterEventParameters parameters)
+        throws FilterException;
+
+    /**
+     * This event puts the given entity as a favorite for the user being currently filtered.
+     * @param entityReference the reference
+     * @param parameters parameters of the events (not yet used)
+     * @throws FilterException if something wrong happens
+     */
+    void onEntityFavorite(EntityReference entityReference, @Default("") FilterEventParameters parameters)
         throws FilterException;
 }

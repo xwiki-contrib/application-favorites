@@ -22,7 +22,7 @@ package org.xwiki.contrib.favorites.internal.filter.output;
 import org.xwiki.filter.event.model.WikiDocumentFilter;
 import org.xwiki.filter.event.model.WikiFilter;
 import org.xwiki.filter.event.model.WikiSpaceFilter;
-import org.xwiki.contrib.favorites.filter.EntityFavoriteFilter;
+import org.xwiki.contrib.favorites.filter.FavoriteFilter;
 
 /**
  * Favorite Instance Output Filter.
@@ -30,6 +30,6 @@ import org.xwiki.contrib.favorites.filter.EntityFavoriteFilter;
  * @since 1.4.0
  */
 public interface FavoriteInstanceOutputFilter
-    extends EntityFavoriteFilter, WikiFilter, WikiDocumentFilter, WikiSpaceFilter
+    extends FavoriteFilter, WikiFilter, WikiDocumentFilter, WikiSpaceFilter
 {
 }

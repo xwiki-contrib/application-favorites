@@ -46,6 +46,8 @@ class FavoriteInstanceOutputFilterStream implements FavoriteInstanceOutputFilter
 
     private final FavoriteManager favoriteManager;
 
+    private List<EntityReference> favorites;
+
     FavoriteInstanceOutputFilterStream(FavoriteManager favoriteManager)
     {
         this.favoriteManager = favoriteManager;
@@ -82,6 +84,16 @@ class FavoriteInstanceOutputFilterStream implements FavoriteInstanceOutputFilter
     }
 
     @Override
+    public void onEntityFavorite(EntityReference entityReference, FilterEventParameters parameters)
+    {
+        if (favorites == null) {
+            favorites = new ArrayList<>();
+        }
+
+        favorites.add(entityReference);
+    }
+
+    @Override
     public void beginWikiDocument(String name, FilterEventParameters parameters)
     {
         currentReference = new EntityReference(name, EntityType.DOCUMENT, currentReference);
@@ -90,6 +102,14 @@ class FavoriteInstanceOutputFilterStream implements FavoriteInstanceOutputFilter
     @Override
     public void endWikiDocument(String name, FilterEventParameters parameters) throws FilterException
     {
+        if (CollectionUtils.isNotEmpty(favorites)) {
+            try {
+                favoriteManager.addAll(currentReference, favorites);
+                favorites = null;
+            } catch (FavoritesException e) {
+                throw new FilterException(e);
+            }
+        }
         backToParent(name);
     }
 
