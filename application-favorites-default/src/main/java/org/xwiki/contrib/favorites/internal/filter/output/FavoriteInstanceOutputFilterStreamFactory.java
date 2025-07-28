@@ -19,12 +19,22 @@
  */
 package org.xwiki.contrib.favorites.internal.filter.output;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.xwiki.component.annotation.Component;
-import org.xwiki.filter.instance.internal.InstanceUtils;
-import org.xwiki.filter.instance.internal.output.AbstractBeanOutputInstanceFilterStreamFactory;
+import org.xwiki.contrib.favorites.FavoriteManager;
+import org.xwiki.filter.AbstractFilterStreamFactory;
+import org.xwiki.filter.descriptor.AbstractFilterStreamDescriptor;
+import org.xwiki.filter.descriptor.FilterStreamDescriptor;
+import org.xwiki.filter.instance.output.OutputInstanceFilterStreamFactory;
+import org.xwiki.filter.output.OutputFilterStream;
+import org.xwiki.filter.type.FilterStreamType;
 
 /**
  * Favorite Instance Output Filter Stream Factory.
@@ -34,27 +44,42 @@ import org.xwiki.filter.instance.internal.output.AbstractBeanOutputInstanceFilte
 @Component
 @Singleton
 @Named(FavoriteInstanceOutputFilterStreamFactory.ID)
-public class FavoriteInstanceOutputFilterStreamFactory extends
-    AbstractBeanOutputInstanceFilterStreamFactory<FavoriteInstanceOutputProperties, FavoriteInstanceOutputFilter>
+public class FavoriteInstanceOutputFilterStreamFactory extends AbstractFilterStreamFactory implements
+    OutputInstanceFilterStreamFactory
 {
-    /**
-     * Instance output filter stream id.
-     */
-    public static final String ID = "favorite";
+    static final String ID = "favorite";
 
-    /**
-     * Instance output filter stream role hint.
-     */
-    public static final String ROLEHINT = InstanceUtils.ROLEHINT + '+' + ID;
+    private static final Collection<Class<?>> FILTER_INTERFACES =
+        Collections.singletonList(FavoriteInstanceOutputFilter.class);
+
+    private static final FilterStreamDescriptor FILTER_DESCRIPTOR = new AbstractFilterStreamDescriptor(
+        "XWiki favorites instance output stream",
+        "Specialized version of the XWiki instance output stream for favorites."
+    ) { };
+
+    @Inject
+    private FavoriteManager favoriteManager;
 
     /**
      * Constructor.
      */
     public FavoriteInstanceOutputFilterStreamFactory()
     {
-        super(ID);
+        super(new FilterStreamType(FilterStreamType.XWIKI_INSTANCE.getType(),
+            FilterStreamType.XWIKI_INSTANCE.getDataFormat() + "+" + ID));
 
-        setName("XWiki favorites instance output stream");
-        setDescription("Specialized version of the XWiki instance output stream for favorites.");
+        setDescriptor(FILTER_DESCRIPTOR);
+    }
+
+    @Override
+    public Collection<Class<?>> getFilterInterfaces()
+    {
+        return FILTER_INTERFACES;
+    }
+
+    @Override
+    public OutputFilterStream createOutputFilterStream(Map<String, Object> properties)
+    {
+        return new FavoriteInstanceOutputFilterStream(favoriteManager);
     }
 }

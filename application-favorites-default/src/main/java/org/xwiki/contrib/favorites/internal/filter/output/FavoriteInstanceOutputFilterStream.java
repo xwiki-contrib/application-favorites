@@ -20,18 +20,16 @@
 package org.xwiki.contrib.favorites.internal.filter.output;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-import javax.inject.Named;
-
-import org.xwiki.component.annotation.Component;
-import org.xwiki.component.annotation.InstantiationStrategy;
-import org.xwiki.component.descriptor.ComponentInstantiationStrategy;
+import org.apache.commons.collections4.CollectionUtils;
 import org.xwiki.contrib.favorites.FavoritesException;
 import org.xwiki.contrib.favorites.FavoriteManager;
 import org.xwiki.filter.FilterEventParameters;
 import org.xwiki.filter.FilterException;
-import org.xwiki.filter.output.AbstractBeanOutputFilterStream;
+import org.xwiki.filter.output.OutputFilterStream;
 import org.xwiki.model.EntityType;
 import org.xwiki.model.reference.EntityReference;
 import org.xwiki.model.reference.WikiReference;
@@ -42,16 +40,16 @@ import org.xwiki.user.UserReference;
  * @since 1.4.0
  * @version $Id$
  */
-@Component
-@Named(FavoriteInstanceOutputFilterStreamFactory.ROLEHINT)
-@InstantiationStrategy(ComponentInstantiationStrategy.PER_LOOKUP)
-public class FavoriteInstanceOutputFilterStream extends AbstractBeanOutputFilterStream<FavoriteInstanceOutputProperties>
-    implements FavoriteInstanceOutputFilter
+class FavoriteInstanceOutputFilterStream implements FavoriteInstanceOutputFilter, OutputFilterStream
 {
     private EntityReference currentReference;
 
-    @Inject
-    private FavoriteManager favoriteManager;
+    private final FavoriteManager favoriteManager;
+
+    FavoriteInstanceOutputFilterStream(FavoriteManager favoriteManager)
+    {
+        this.favoriteManager = favoriteManager;
+    }
 
     @Override
     public void close() throws IOException
@@ -141,6 +139,12 @@ public class FavoriteInstanceOutputFilterStream extends AbstractBeanOutputFilter
     public void endWikiSpace(String name, FilterEventParameters parameters)
     {
         backToParent(name);
+    }
+
+    @Override
+    public Object getFilter()
+    {
+        return this;
     }
 
     private void backToParent(String name)
