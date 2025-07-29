@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.xwiki.contrib</groupId>
     <artifactId>application-favorites-parent</artifactId>
-    <version>1.3.2-SNAPSHOT</version>
+    <version>1.4.0</version>
   </parent>
   <artifactId>application-favorites-filter-api</artifactId>
   <name>Application Favorites - Filter API</name>
