@@ -20,7 +20,6 @@
 package org.xwiki.contrib.favorites.internal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -36,15 +35,14 @@ import org.xwiki.contrib.favorites.FavoritesException;
 import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.model.reference.EntityReference;
 import org.xwiki.model.reference.EntityReferenceSerializer;
-import org.xwiki.model.reference.LocalDocumentReference;
 import org.xwiki.user.UserReference;
 import org.xwiki.user.UserReferenceSerializer;
 
 import com.xpn.xwiki.XWiki;
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
-import com.xpn.xwiki.doc.XWikiDocument;
-import com.xpn.xwiki.objects.BaseObject;
+import com.xpn.xwiki.api.Document;
+import com.xpn.xwiki.api.Object;
 
 /**
  * Default Favorites Manager implementation.
@@ -55,8 +53,7 @@ import com.xpn.xwiki.objects.BaseObject;
 @Singleton
 public class DefaultFavoriteManager implements FavoriteManager
 {
-    private static final LocalDocumentReference FAVORITES_CLASS_REF =
-        new LocalDocumentReference(Arrays.asList("Favorites", "Code"), "FavoritesClass");
+    private static final String FAVORITES_CLASS_REF = "Favorites.Code.FavoritesClass";
 
     private static final String PAGES = "pages";
 
@@ -115,13 +112,13 @@ public class DefaultFavoriteManager implements FavoriteManager
         try {
             XWikiContext context = xcontextProvider.get();
             XWiki xwiki = context.getWiki();
-            XWikiDocument userDoc = xwiki.getDocument(userRef, context);
+            Document userDoc = new Document(xwiki.getDocument(userRef, context), context);
             checkUserExists(userRef, userDoc);
 
             // Create the favorites object if it does not exist.
-            BaseObject favObj = userDoc.getXObject(FAVORITES_CLASS_REF, true, context);
+            Object favObj = userDoc.getObject(FAVORITES_CLASS_REF, true);
 
-            List<String> favDocs = favObj.getListValue(PAGES);
+            List<String> favDocs = (List<String>) favObj.getValue(PAGES);
             if (favDocs == null) {
                 // Initialize the list of favorite documents upon object creation.
                 favDocs = new ArrayList<>();
@@ -139,8 +136,8 @@ public class DefaultFavoriteManager implements FavoriteManager
             }
 
             if (updated) {
-                favObj.setDBStringListValue(PAGES, favDocs);
-                xwiki.saveDocument(userDoc, saveComment, context);
+                favObj.set(PAGES, favDocs);
+                userDoc.save(saveComment);
             }
             return updated;
         } catch (XWikiException e) {
@@ -161,12 +158,12 @@ public class DefaultFavoriteManager implements FavoriteManager
         try {
             XWikiContext context = xcontextProvider.get();
             XWiki xwiki = context.getWiki();
-            XWikiDocument userDoc = xwiki.getDocument(userRef, context);
+            Document userDoc = new Document(xwiki.getDocument(userRef, context), context);
             checkUserExists(userRef, userDoc);
 
             // Create the favorites object if it does not exist.
-            BaseObject favObj = userDoc.getXObject(FAVORITES_CLASS_REF);
-            List<String> favDocs = favObj.getListValue(PAGES);
+            Object favObj = userDoc.getObject(FAVORITES_CLASS_REF);
+            List<String> favDocs = (List<String>) favObj.getValue(PAGES);
             if (favDocs == null) {
                 return false;
             }
@@ -197,9 +194,9 @@ public class DefaultFavoriteManager implements FavoriteManager
         try {
             XWikiContext context = xcontextProvider.get();
             XWiki xwiki = context.getWiki();
-            XWikiDocument userDoc = xwiki.getDocument(userRef, context);
-            BaseObject favObj = userDoc.getXObject(FAVORITES_CLASS_REF, false, context);
-            List<String> favDocs = favObj == null ? null : favObj.getListValue(PAGES);
+            Document userDoc = new Document(xwiki.getDocument(userRef, context), context);
+            Object favObj = userDoc.getObject(FAVORITES_CLASS_REF, false);
+            List<String> favDocs = favObj == null ? null : (List<String>) favObj.getValue(PAGES);
             if (favDocs == null) {
                 return false;
             }
@@ -210,8 +207,8 @@ public class DefaultFavoriteManager implements FavoriteManager
                 updated = favDocs.remove(favDocFullName) || updated;
             }
             if (updated) {
-                favObj.setDBStringListValue(PAGES, favDocs);
-                xwiki.saveDocument(userDoc, saveComment, context);
+                favObj.set(PAGES, favDocs);
+                userDoc.save(saveComment);
             }
             return updated;
         } catch (XWikiException e) {
@@ -226,7 +223,7 @@ public class DefaultFavoriteManager implements FavoriteManager
         return removeAll(userReferenceSerializer.serialize(userRef), docRefs, saveComment);
     }
 
-    private static void checkUserExists(EntityReference userRef, XWikiDocument userDoc) throws FavoritesException
+    private static void checkUserExists(EntityReference userRef, Document userDoc) throws FavoritesException
     {
         if (userDoc.isNew()) {
             throw new FavoritesException(String.format("User [%s] does not exist", userRef));
