@@ -118,7 +118,7 @@ public class DefaultFavoriteManager implements FavoriteManager
             // Create the favorites object if it does not exist.
             Object favObj = userDoc.getObject(FAVORITES_CLASS_REF, true);
 
-            List<String> favDocs = (List<String>) favObj.getValue(PAGES);
+            List<String> favDocs = favObj == null ? null : (List<String>) favObj.getValue(PAGES);
             if (favDocs == null) {
                 // Initialize the list of favorite documents upon object creation.
                 favDocs = new ArrayList<>();
@@ -163,7 +163,7 @@ public class DefaultFavoriteManager implements FavoriteManager
 
             // Create the favorites object if it does not exist.
             Object favObj = userDoc.getObject(FAVORITES_CLASS_REF);
-            List<String> favDocs = (List<String>) favObj.getValue(PAGES);
+            List<String> favDocs = favObj == null ? null : (List<String>) favObj.getValue(PAGES);
             if (favDocs == null) {
                 return false;
             }
