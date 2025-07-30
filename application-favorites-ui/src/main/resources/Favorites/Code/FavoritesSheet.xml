@@ -182,7 +182,6 @@ require(['jquery', 'xwiki-suggestPropertyValues'], function($){
   var editUserFavoritesURL = $('#editUserFavoritesURL').val();
   var newUserFavoritesObjectURL = $('#newUserFavoritesObjectURL').val();
   $(document).ready(function(){
-    console.log('in favorites js')
     loadCss("$services.webjars.url('select2', 'css/select2.min.css')");
     // $("#favoritesContainer select").select2();
     $(".editFavorites").click(function(){
