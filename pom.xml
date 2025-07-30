@@ -27,7 +27,7 @@
     <version>12.10-1</version>
   </parent>
   <artifactId>application-favorites-parent</artifactId>
-  <version>1.4.1-SNAPSHOT</version>
+  <version>1.4.1</version>
   <packaging>pom</packaging>
   <name>Favorites Application - Parent POM</name>
   <description>Application to manage a panel or menu with a list of Favorite pages.</description>
@@ -35,7 +35,7 @@
     <connection>scm:git:git://github.com/xwiki-contrib/application-favorites.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-favorites.git</developerConnection>
     <url>https://github.com/xwiki-contrib/application-favorites</url>
-    <tag>HEAD</tag>
+    <tag>application-favorites-parent-1.4.1</tag>
   </scm>
   <developers>
     <developer>
