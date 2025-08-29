@@ -36,13 +36,10 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content># Other keys
-favorites.entry.name=Favourites
+  <content>favorites.entry.name=Favourites
 
 # Deprecated keys
 favorites.dataSpace.title=Data
-
- # Other keys
 favorites.entry.name=Favourites
 favorites.page.title=Favourites
 favorites.entry.name=Favourites
@@ -59,7 +56,7 @@ favorites.user.removeCurrentPage.success=Page removed from favourites.
 favorites.user.removeCurrentPage.doesntExist=The page is not in the list of favourites.
 favorites.user.actions_edit=Manage Favourites
 favorites.user.tools_access=Access Favourites
-favorites.user.updateProfile=Favorite pages updated.
+favorites.user.updateProfile=Favourite pages updated.
 favorites.form.save_button_text=Save
 
 
@@ -84,5 +81,6 @@ favorites.moreOptions.remove=Remove from favourites
 
 # Macro
 rendering.macro.favorites.name=Favourites
-rendering.macro.favorites.description=List all favorite pages of a user</content>
+rendering.macro.favorites.description=List all favorite pages of a user
+</content>
 </xwikidoc>
