@@ -1,3 +1,4 @@
 org.xwiki.contrib.favorites.script.FavoritesScriptService
 org.xwiki.contrib.favorites.internal.DefaultFavoriteManager
 org.xwiki.contrib.favorites.internal.filter.output.FavoriteInstanceOutputFilterStreamFactory
+org.xwiki.contrib.favorites.internal.FavoritePageRenamedEventListener
