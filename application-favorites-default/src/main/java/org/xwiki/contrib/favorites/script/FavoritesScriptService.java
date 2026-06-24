@@ -36,6 +36,7 @@ import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.script.service.ScriptService;
 
 import com.xpn.xwiki.XWikiContext;
+import com.xpn.xwiki.XWikiException;
 
 /**
  * Favorites Script service.
@@ -68,7 +69,8 @@ public class FavoritesScriptService implements ScriptService
      * @param docRef the entity to favorite (for now, only documents)
      * @return a map with a success and a status members, for JSON serialization
      */
-    public Map<String, String> add(DocumentReference userRef, DocumentReference docRef) throws FavoritesException
+    public Map<String, String> add(DocumentReference userRef, DocumentReference docRef)
+        throws FavoritesException, XWikiException
     {
         XWikiContext context = xcontextProvider.get();
         if (!context.getWiki().exists(docRef, context)) {
