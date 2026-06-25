@@ -54,6 +54,7 @@ import org.xwiki.search.solr.Solr;
 import org.xwiki.search.solr.SolrException;
 import org.xwiki.search.solr.SolrUtils;
 import org.xwiki.search.solr.internal.SolrClientInstance;
+import org.xwiki.search.solr.internal.api.FieldUtils;
 
 import com.xpn.xwiki.XWiki;
 import com.xpn.xwiki.XWikiContext;
@@ -165,6 +166,10 @@ public class FavoritePageRenamedEventListener extends AbstractLocalEventListener
 
         try {
             SolrQuery solrQuery = new SolrQuery(solrQueryStr);
+            solrQuery.setRows(ROWS);
+            // Set sorting based on the ID for cursor-based pagination to work.
+            solrQuery.addSort(FieldUtils.ID, SolrQuery.ORDER.asc);
+            solrQuery.set(CursorMarkParams.CURSOR_MARK_PARAM, CursorMarkParams.CURSOR_MARK_START);
 
             QueryResponse response;
             do {
@@ -202,7 +207,7 @@ public class FavoritePageRenamedEventListener extends AbstractLocalEventListener
 
         List<String> favDocs = favObj.getListValue(PAGES);
         if (favDocs == null) {
-            favDocs = new ArrayList<>();
+            return;
         }
         favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
 
@@ -221,7 +226,7 @@ public class FavoritePageRenamedEventListener extends AbstractLocalEventListener
 
         List<String> favDocs = favObj.getListValue(PAGES);
         if (favDocs == null) {
-            favDocs = new ArrayList<>();
+            return;
         }
         favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
         favDocs.add(compactWikiSerializer.serialize(newRef, userRef));
