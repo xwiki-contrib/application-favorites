@@ -20,7 +20,6 @@
 package org.xwiki.contrib.favorites.internal;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -209,7 +208,10 @@ public class FavoritePageRenamedEventListener extends AbstractLocalEventListener
         if (favDocs == null) {
             return;
         }
-        favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
+        boolean removed = favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
+        if (!removed) {
+            return;
+        }
 
         favObj.setDBStringListValue(PAGES, favDocs);
         xwiki.saveDocument(userDoc, "Remove favorite for deleted document.", context);
@@ -228,7 +230,10 @@ public class FavoritePageRenamedEventListener extends AbstractLocalEventListener
         if (favDocs == null) {
             return;
         }
-        favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
+        boolean removed = favDocs.remove(compactWikiSerializer.serialize(prevRef, userRef));
+        if (!removed) {
+            return;
+        }
         favDocs.add(compactWikiSerializer.serialize(newRef, userRef));
 
         favObj.setDBStringListValue(PAGES, favDocs);
