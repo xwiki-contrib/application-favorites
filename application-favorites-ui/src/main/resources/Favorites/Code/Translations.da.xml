@@ -36,54 +36,51 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content># Other keys
-### Missing: favorites.entry.name=
+  <content>favorites.entry.name=Favoritter
 
 # Deprecated keys
-### Missing: favorites.dataSpace.title=
-
- # Other keys
-### Missing: favorites.entry.name=
-### Missing: favorites.page.title=
-### Missing: favorites.entry.name=
+favorites.dataSpace.title=Data
+favorites.entry.name=Favoritter
+favorites.page.title=Favoritter
+favorites.entry.name=Favoritter
 
 # Deprecated keys
-### Missing: favorites.dataSpace.title=
+favorites.dataSpace.title=Data
 # Live table additional keys
-### Missing: favorites.default.actions_edit=
-### Missing: favorites.user.addCurrentPage=
-### Missing: favorites.user.addCurrentPage.alreadyExists=
-### Missing: favorites.user.addRemoveOperation.fail=
-### Missing: favorites.user.addCurrentPage.success=
-### Missing: favorites.user.removeCurrentPage.success=
-### Missing: favorites.user.removeCurrentPage.doesntExist=
-### Missing: favorites.user.actions_edit=
-### Missing: favorites.user.tools_access=
-### Missing: favorites.user.updateProfile=
-### Missing: favorites.form.save_button_text=
+favorites.default.actions_edit=Rediger standardfavoritter
+favorites.user.addCurrentPage=Tilføj denne side
+favorites.user.addCurrentPage.alreadyExists=Siden findes allerede i favoritterne.
+favorites.user.addRemoveOperation.fail=Favoritterne kunne ikke opdateres.
+favorites.user.addCurrentPage.success=Siden er føjet til favoritterne.
+favorites.user.removeCurrentPage.success=Siden er fjernet fra favoritterne.
+favorites.user.removeCurrentPage.doesntExist=Siden er ikke på listen over favoritter.
+favorites.user.actions_edit=Administrer favoritter
+favorites.user.tools_access=Gå til favoritter
+favorites.user.updateProfile=Favoritsiderne er opdateret.
+favorites.form.save_button_text=Gem
 
 
 # Panel keys
-### Missing: favorites.panel.more=
-### Missing: favorites.panel.title=
+favorites.panel.more={0} mere ...
+favorites.panel.title=Mine favoritter
 
 # Modal popup keys
-### Missing: favorites.modal.title=
-### Missing: favorites.modal.user.title=
-### Missing: favorites.pinned.modal.user.title=
+favorites.modal.title=Administrer standardfavoritter
+favorites.modal.user.title=Administrer mine favoritter
+favorites.pinned.modal.user.title=Administrer mine fastgjorte favoritter
 
 # User profile
-### Missing: favorites.userprofile.menu=
+favorites.userprofile.menu=Mine favoritter
 
 # Help
-### Missing: favorites.help.description=
+favorites.help.description=Velkommen til administrationen af favoritter. Du aktiverer favoritter ved enten at tilføje Favorites.Code.FavoritesPanel til listen over paneler eller ved at inkludere Favorites.Code.FavoritesMenu i menuen. Nedenfor kan du redigere standardlisten over favoritter.
 
 # More option menu button
-### Missing: favorites.moreOptions.add=
-### Missing: favorites.moreOptions.remove=
+favorites.moreOptions.add=Føj til favoritter
+favorites.moreOptions.remove=Fjern fra favoritter
 
 # Macro
-### Missing: rendering.macro.favorites.name=
-### Missing: rendering.macro.favorites.description=
+rendering.macro.favorites.name=Favoritter
+rendering.macro.favorites.description=Vis en brugers favoritsider
 </content>
 </xwikidoc>
